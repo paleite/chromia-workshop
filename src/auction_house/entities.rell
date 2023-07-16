@@ -1,0 +1,23 @@
+entity user {
+  key name;
+  key pubkey;
+}
+
+entity wallet {
+  key user;
+  mutable balance: integer;
+}
+
+entity auction {
+  owner: user;
+  item: text;
+  start: timestamp;
+  end: timestamp;
+}
+
+entity bid {
+  auction;
+  user;
+  amount: integer;
+  timestamp;
+}

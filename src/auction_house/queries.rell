@@ -1,0 +1,1 @@
+query list_all() = auction @* {} ( auction_to_info_dto($) );

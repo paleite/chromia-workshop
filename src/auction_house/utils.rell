@@ -1,0 +1,1 @@
+val DAY_IN_MILLIS = 1000 * 60 * 60 * 24;

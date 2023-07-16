@@ -1,0 +1,20 @@
+{
+  "name": "chromia-workshop",
+  "version": "1.0.0",
+  "description": "## Prerequisites 1. [Install Chromia CLI](https://docs.chromia.com/getting-started/dev-setup/backend/cli-installation) 2. [Install Rell VS Code Plugin](https://docs.chromia.com/getting-started/dev-setup/backend/vscode-installation)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postgres:start": "docker compose up -d",
+    "postgres:stop": "docker compose down",
+    "start": "npm run postgres:stop && npm run postgres:start && chr node start",
+    "auctions": "npx ts-node client/ah.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "postchain-client": "^1.5.6",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}

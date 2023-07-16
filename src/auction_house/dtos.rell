@@ -1,0 +1,19 @@
+struct auction_info_dto {
+  rowid;
+  item: text;
+  owner: user_dto;
+  start: timestamp;
+  end: timestamp;
+  bid: bid_info_dto?;
+}
+
+struct bid_info_dto {
+  user: user_dto;
+  amount: integer;
+  timestamp;
+}
+
+struct user_dto {
+  name;
+  pubkey;
+}

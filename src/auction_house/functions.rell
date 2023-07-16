@@ -1,0 +1,10 @@
+function deduct_balance(user, amount: integer) {
+  val wallet = wallet @ { user };
+  require(wallet.balance >= amount, "Not sufficient amount of balance available");
+  wallet.balance -= amount;
+}
+
+function increment_balance(user, amount: integer) {
+  val wallet = wallet @ { user };
+  wallet.balance += amount;
+}

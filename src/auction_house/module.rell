@@ -1,0 +1,2 @@
+@mount("auction_house")
+module;

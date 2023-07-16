@@ -1,0 +1,28 @@
+function require_signed_by_pubkey(pubkey) {
+  require(op_context.is_signer(pubkey), "Not signed by the correct keypair");
+}
+
+function require_user(pubkey) {
+  require_signed_by_pubkey(pubkey);
+  return require(user @? { pubkey }, "No user created exists for provided pubkey");
+}
+
+function require_not_owner(pubkey, auction) {
+  require(pubkey != auction.owner.pubkey, "Unable to bid on your own auction");
+}
+
+function require_auction(rowid) {
+  return require(auction @? { rowid }, "No such auction exists");
+}
+
+function require_auction_still_active(auction) {
+  require(auction.end > op_context.last_block_time, "Auction is already finished");
+}
+
+function require_highest_bidder(auction, amount: integer) {
+  require(bid @? { auction, .amount >= amount } == null, "Not the highest bidder");
+}
+
+function require_auction_finished(auction) {
+  require(auction.end <= op_context.last_block_time, "Auction has not finished yet");
+}

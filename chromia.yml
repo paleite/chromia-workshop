@@ -1,0 +1,6 @@
+blockchains:
+  workshop: # <----- This is the blockchain that starts
+    module: main # <----- This is the entry point of the chain
+
+compile:
+  source: src
