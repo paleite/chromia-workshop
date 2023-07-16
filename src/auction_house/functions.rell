@@ -8,3 +8,22 @@ function increment_balance(user, amount: integer) {
   val wallet = wallet @ { user };
   wallet.balance += amount;
 }
+
+function complete_auction(auction) {
+  val bids = bid @* { auction } ( @omit @sort_desc .rowid, $ );
+
+  if (bids.size() > 0) {
+    val winner = bids[0];
+    increment_balance(auction.owner, winner.amount);
+  }
+  
+  if (bids.size() > 1) {
+    val losers = bids.sub(1);
+    for (loser in losers) {
+      increment_balance(loser.user, loser.amount);
+    }
+  }
+
+  delete bids;
+  delete auction;
+}

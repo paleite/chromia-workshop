@@ -13,6 +13,7 @@ entity auction {
   item: text;
   start: timestamp;
   end: timestamp;
+  buyout: integer = 15;
 }
 
 entity bid {
