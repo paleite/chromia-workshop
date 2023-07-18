@@ -23,6 +23,10 @@ operation place_bid(pubkey, rowid, amount: integer) {
 
   val timestamp = op_context.last_block_time;
   create bid(auction, user, amount, timestamp);
+
+  if (amount >= auction.buyout) {
+    complete_auction(auction);
+  }
 }
 
 operation settle_auction(rowid) {
