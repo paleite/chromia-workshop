@@ -59,7 +59,7 @@ Try if you can place a bid of `10` on any of the auctions.
 
 ## Updating the code of a local node
 
-Modify the code so that auctions includes a default buyout price 25 and if a bid matches or is above that, then the auction is instantly settled and a balance of 15 is transferred.
+Modify the code so that auctions includes a default buyout price 15 and if a bid matches or is above that, then the auction is instantly settled and a balance of 15 is transferred.
 
 After that, update the code that runs on the node.
 
