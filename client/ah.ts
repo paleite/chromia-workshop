@@ -1,5 +1,10 @@
-import { IClient, SignatureProvider, createClient, newSignatureProvider } from "postchain-client";
-import readline from 'readline';
+import {
+  IClient,
+  SignatureProvider,
+  createClient,
+  newSignatureProvider,
+} from "postchain-client";
+import readline from "readline";
 
 const signer1 = newSignatureProvider({ privKey: Buffer.alloc(32, "a") });
 const signer2 = newSignatureProvider({ privKey: Buffer.alloc(32, "b") });
@@ -46,32 +51,53 @@ async function main() {
 async function registerUser(
   chromiaClient: IClient,
   signer: SignatureProvider,
-  name: string) {
-  await chromiaClient.signAndSendUniqueTransaction({
-    operations: [{ name: "auction_house.register_user", args: [signer.pubKey, name] }],
-    signers: [signer.pubKey]
-  }, signer);
+  name: string
+) {
+  await chromiaClient.signAndSendUniqueTransaction(
+    {
+      operations: [
+        { name: "auction_house.register_user", args: [signer.pubKey, name] },
+      ],
+      signers: [signer.pubKey],
+    },
+    signer
+  );
 }
 
 async function listAuction(
   chromiaClient: IClient,
   signer: SignatureProvider,
-  item: string) {
-  await chromiaClient.signAndSendUniqueTransaction({
-    operations: [{ name: "auction_house.list_auction", args: [signer.pubKey, item] }],
-    signers: [signer.pubKey]
-  }, signer);
+  item: string
+) {
+  await chromiaClient.signAndSendUniqueTransaction(
+    {
+      operations: [
+        { name: "auction_house.list_auction", args: [signer.pubKey, item] },
+      ],
+      signers: [signer.pubKey],
+    },
+    signer
+  );
 }
 
 async function placeBid(
   chromiaClient: IClient,
   signer: SignatureProvider,
   rowid: number,
-  amount: number) {
-  await chromiaClient.signAndSendUniqueTransaction({
-    operations: [{ name: "auction_house.place_bid", args: [signer.pubKey, rowid, amount] }],
-    signers: [signer.pubKey]
-  }, signer);
+  amount: number
+) {
+  await chromiaClient.signAndSendUniqueTransaction(
+    {
+      operations: [
+        {
+          name: "auction_house.place_bid",
+          args: [signer.pubKey, rowid, amount],
+        },
+      ],
+      signers: [signer.pubKey],
+    },
+    signer
+  );
 }
 
 async function listAuctions(chromiaClient: IClient): Promise<AuctionInfoDto[]> {
@@ -82,9 +108,13 @@ function printAuctions(auctions: AuctionInfoDto[]) {
   console.log(`Found ${auctions.length} active auctions`);
   console.log(`\n======`);
   for (const auction of auctions) {
-    console.log(`Item: ${auction.item}, listed by: ${auction.owner.name}, with ID: ${auction.rowid}`);
+    console.log(
+      `Item: ${auction.item}, listed by: ${auction.owner.name}, with ID: ${auction.rowid}`
+    );
     if (auction.bid) {
-      console.log(`Leading bid: ${auction.bid.amount}, by: ${auction.bid.user.name}, at: ${auction.bid.timestamp}`);
+      console.log(
+        `Leading bid: ${auction.bid.amount}, by: ${auction.bid.user.name}, at: ${auction.bid.timestamp}`
+      );
     }
     console.log(`======`);
   }
@@ -96,11 +126,11 @@ function waitForKeyPress(): Promise<void> {
   return new Promise((resolve) => {
     const rl = readline.createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     });
 
     console.log("Press ENTER to proceed...");
-    rl.question('', () => {
+    rl.question("", () => {
       rl.close();
       resolve();
     });
@@ -114,18 +144,18 @@ type AuctionInfoDto = {
   start: number;
   end: number;
   bid?: BidInfoDto;
-}
+};
 
 type UserInfoDto = {
   name: string;
   pubkey: string;
-}
+};
 
 type BidInfoDto = {
   user: UserInfoDto;
   amount: number;
   timestamp: number;
-}
+};
 
 main()
   .then(() => console.log("Executed Auction House script successfully"))

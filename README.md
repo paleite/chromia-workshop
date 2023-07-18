@@ -1,6 +1,7 @@
 # Chromia Workshop
 
 ## Prerequisites
+
 1. Git
 2. Node & NPM
 3. Install JDK 17
@@ -23,9 +24,11 @@ chr node start
 For convenience I've packaged defined a `postgres` in `docker-compose.yml` and provided a script to easily start it.
 
 ## Seeding data
+
 We are going to test out the updated typescript `postchain-client` and I've tested a test script for this under `client/ah.ts`.
 
 You can execute it by running:
+
 ```bash
 npm run auctions
 ```
@@ -33,16 +36,21 @@ npm run auctions
 ## Query your local node
 
 Next lets try to query the node to list all the auctions.
+
 ```bash
 chr query auction_house.list_all
 ```
 
 ## Generating a keypair
+
 In order to send transactions we will need a `keypair`.
+
 ```bash
 chr keygen
 ```
+
 Create a `.secret` file in the project and store your credentials, i.e.
+
 ```
 privkey=...
 pubkey=...
@@ -50,7 +58,9 @@ mnemonic=...
 ```
 
 ## Sending transactions to your local node
+
 The contract of the dapp specifies that we need to register a user, so let's do that first.
+
 ```bash
 chr tx --secret .secret --await auction_house.register_user <pubkey> <name>
 ```
