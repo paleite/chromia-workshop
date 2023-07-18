@@ -5,6 +5,7 @@ struct auction_info_dto {
   start: timestamp;
   end: timestamp;
   bid: bid_info_dto?;
+  buyout: integer;
 }
 
 struct bid_info_dto {

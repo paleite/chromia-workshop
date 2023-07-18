@@ -1,17 +1,18 @@
 function auction_to_info_dto(auction) {
   val owner = user_dto(auction.owner.pubkey, auction.owner.name);
 
-  val bid = bid @? { auction } ( 
-    @omit @sort_desc .rowid, 
-    bid_info_dto(user_dto($.user.pubkey, $.user.name), $.amount, $.timestamp) 
+  val bid = bid @? { auction } (
+    @omit @sort_desc .rowid,
+    bid_info_dto(user_dto($.user.pubkey, $.user.name), $.amount, $.timestamp)
   ) limit 1;
 
   return auction_info_dto(
-    auction.rowid, 
-    auction.item, 
-    owner, 
-    bid, 
-    start = auction.start, 
-    end = auction.end
+    auction.rowid,
+    auction.item,
+    owner,
+    bid,
+    start = auction.start,
+    end = auction.end,
+    buyout = auction.buyout
   );
 }
