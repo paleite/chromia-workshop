@@ -1,3 +1,5 @@
+function get_balance(pubkey) = wallet @ { .user.pubkey == pubkey }(.balance);
+
 function deduct_balance(user, amount: integer) {
   val wallet = wallet @ { user };
   require(wallet.balance >= amount, "Not sufficient amount of balance available");
@@ -16,7 +18,7 @@ function complete_auction(auction) {
     val winner = bids[0];
     increment_balance(auction.owner, winner.amount);
   }
-  
+
   if (bids.size() > 1) {
     val losers = bids.sub(1);
     for (loser in losers) {

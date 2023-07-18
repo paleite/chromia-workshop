@@ -1,1 +1,2 @@
 query list_all() = auction @* {} ( auction_to_info_dto($) );
+query view_balance(pubkey) = get_balance(pubkey);
